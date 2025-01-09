@@ -28,15 +28,14 @@ const SignUpPage = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-        const googleUser = await window.gapi.auth2.getAuthInstance().signIn();
-        const token = googleUser.getAuthResponse().id_token;
-        googleSignIn(token);
-    } catch (error) {
-        console.log("Error in handleGoogleSignIn:", error);
-        // toast.error("Google sign-in failed");
-    }
+  const handleGoogleSignIn = () => {
+    const auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.grantOfflineAccess().then((response) => {
+      googleSignIn(response.code);
+    }).catch((error) => {
+      console.log("Error in handleGoogleSignIn:", error);
+      // toast.error("Google sign-in failed");
+    });
   };
 
   return (
