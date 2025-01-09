@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 export const useStore = create((set, get) => ({
     authUser: null,
-    userRole: "user",
+    userRole: false,
     isSigningUp: false,
     isLoggingIn: false,
     isCheckingAuth: true,
@@ -44,7 +44,7 @@ export const useStore = create((set, get) => ({
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
             // console.log("User role googleSignIn:", res.data.Role);
-            set({ authUser: true, userRole: res.data.Role });
+            set({ authUser: true, userRole: res.data.role === 'admin' });
             console.log(userRole, res.data.Role);
         } catch (error) {
             console.log("Error in googleSignIn:", error);
@@ -75,9 +75,8 @@ export const useStore = create((set, get) => ({
             toast.success("Logged in successfully");
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-            set({ authUser: true , userRole: res.data.role });
-            console.log(userRole, res.data.Role);
-            // console.log("User role signIn data:", res.data.Role);
+            set({ authUser: true, userRole: res.data.role === 'admin' });
+            console.log(userRole, res.data.role);
         } catch (error) {
             console.log("Error in signIn:", error);
             toast.error("Sign in failed");
