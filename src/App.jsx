@@ -13,6 +13,21 @@ function App() {
   const { authUser, initializeAuth, isCheckingAuth } = useStore();
 
   useEffect(() => {
+    const loadGoogleScript = () => {
+        const script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/platform.js';
+        script.async = true;
+        script.onload = () => {
+            window.gapi.load('auth2', () => {
+                window.gapi.auth2.init({
+                    client_id: 'YOUR_GOOGLE_CLIENT_ID',
+                });
+            });
+        };
+        document.body.appendChild(script);
+    };
+
+    loadGoogleScript();
     initializeAuth();
   }, [initializeAuth]);
 

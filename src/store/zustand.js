@@ -55,6 +55,19 @@ export const useStore = create((set, get) => ({
         }
     },
 
+    googleSignIn: async (token) => {
+        try {
+            const res = await axiosInstance.post("/google-signin", { token });
+            toast.success("Logged in successfully");
+            document.cookie = `jwtToken=${res.data.token}; path=/`;
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+            set({ authUser: true });
+        } catch (error) {
+            console.log("Error in googleSignIn:", error);
+            toast.error("Google sign-in failed");
+        }
+    },
+
     signOut: async () => {
         try {
             await axiosInstance.get("/logout");

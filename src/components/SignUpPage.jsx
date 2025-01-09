@@ -3,7 +3,7 @@ import { useStore } from '../store/zustand.js';
 import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
-  const { signUp, isSigningUp } = useStore();
+  const { signUp, isSigningUp, googleSignIn } = useStore();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -25,6 +25,17 @@ const SignUpPage = () => {
     } else {
       setErrors({});
       signUp(data);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+        const googleUser = await window.gapi.auth2.getAuthInstance().signIn();
+        const token = googleUser.getAuthResponse().id_token;
+        googleSignIn(token);
+    } catch (error) {
+        console.log("Error in handleGoogleSignIn:", error);
+        toast.error("Google sign-in failed");
     }
   };
 
@@ -52,6 +63,12 @@ const SignUpPage = () => {
             Sign Up
           </button>
         </form>
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4"
+        >
+          Sign Up with Google
+        </button>
         <button
           onClick={() => navigate('/login')}
           className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
