@@ -161,9 +161,9 @@ export const useStore = create(persist(
 
         updateUserRole: async (userId, role) => {
             set({ isUpdatingUserRole: true });
-            const Id = selectedUser.uid;
+            const Id = get().selectedUser.uid; // Correctly reference selectedUser
             console.log("Role:", role);
-            console.log("userId:", userId);
+            console.log("userId:", Id);
             try {
                 const res = await axiosInstance.put(`/dashboard/${Id}/role`, { role });
                 set({ users: get().users.map(user => user._id === Id ? res.data.user : user) });
