@@ -29,8 +29,9 @@ const LoginPage = () => {
 
   const handleGoogleSignIn = () => {
     const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.grantOfflineAccess().then((response) => {
-      googleSignIn(response.code);
+    auth2.signIn().then((googleUser) => {
+      const token = googleUser.getAuthResponse().id_token;
+      googleSignIn(token);
     }).catch((error) => {
       console.log("Error in handleGoogleSignIn:", error);
       // toast.error("Google sign-in failed");
