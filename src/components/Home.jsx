@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div className='bg-pattern flex justify-center items-center h-[87vh] z-0 w-full'>
-      {userRole == 'admin' && (
+      {userRole === 'admin' && (
         <button
           onClick={() => navigate('/dashboard')}
           className="bg-emerald-800 hover:bg-emerald-600 text-white font-bold py-2 px-4 mr-8 rounded"

@@ -45,6 +45,7 @@ export const useStore = create((set, get) => ({
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
             // console.log("User role googleSignIn:", res.data.Role);
             set({ authUser: true, userRole: res.data.Role });
+            console.log(userRole, res.data.Role);
         } catch (error) {
             console.log("Error in googleSignIn:", error);
             toast.error("Google sign-in failed");
@@ -75,6 +76,7 @@ export const useStore = create((set, get) => ({
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
             set({ authUser: true , userRole: res.data.role });
+            console.log(userRole, res.data.Role);
             // console.log("User role signIn data:", res.data.Role);
         } catch (error) {
             console.log("Error in signIn:", error);
