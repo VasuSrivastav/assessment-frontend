@@ -22,12 +22,11 @@ export const useStore = create((set, get) => ({
             const jwtToken = token.split('=')[1];
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
             try {
+                console.log("1", jwtToken);
                 const res = await axiosInstance.get("/auth/auth-user");
-                set({ authUser: true, userRole: res.data.user.Role });
-                console.log("User role initaAuth1:", res.data.user.Role);
-                console.log("User role initaAuth2:", res.data.user.role);
-                console.log("User role initaAuth3:", res.data.role);
-                console.log("User role initaAuth4:", res.data);
+                console.log("2", res.data);
+                set({ authUser: true, userRole: res.data.user.role });
+                console.log("User role initaAuth:", res.data.user.role);
             } catch (error) {
                 console.log("Error in initializeAuth:", error);
                 set({ authUser: null, userRole: null });
