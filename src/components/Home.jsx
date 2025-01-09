@@ -17,6 +17,12 @@ const Home = () => {
         </button>
       )}
       <button
+          onClick={() => navigate('/dashboard')}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Go to Dashboard
+      </button>
+      <button
         onClick={() => navigate('/posts')}
         className="bg-emerald-800 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded"
       >
