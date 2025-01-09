@@ -23,7 +23,8 @@ export const useStore = create((set, get) => ({
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
             try {
                 const res = await axiosInstance.get("/auth-user");
-                set({ authUser: res.data, userRole: res.data.role });
+                set({ authUser: true, userRole: res.data.role });
+                console.log("User role initaAuth:", res.data.role);
             } catch (error) {
                 console.log("Error in initializeAuth:", error);
                 set({ authUser: null, userRole: null });
@@ -40,7 +41,8 @@ export const useStore = create((set, get) => ({
             toast.success("Logged in successfully");
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-            set({ authUser: res.data.user, userRole: res.data.user.role });
+            set({ authUser: true, userRole: res.data.user.role });
+            console.log("User role googleSignIn:", res.data.user.role);
         } catch (error) {
             console.log("Error in googleSignIn:", error);
             toast.error("Google sign-in failed");
@@ -54,7 +56,7 @@ export const useStore = create((set, get) => ({
             toast.success("User registered successfully");
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-            set({ authUser: res.data.user, userRole: res.data.user.role });
+            set({ authUser: true, userRole: res.data.user.role });
         } catch (error) {
             console.log("Error in signUp:", error);
             toast.error("Sign up failed");
@@ -70,7 +72,9 @@ export const useStore = create((set, get) => ({
             toast.success("Logged in successfully");
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-            set({ authUser: res.data.user, userRole: res.data.user.role });
+            set({ authUser: true, userRole: res.data.user.role??'user' });
+            console.log("User role signIn role:", res.data.user.role);
+            console.log("User role signIn:", res.data.user);
         } catch (error) {
             console.log("Error in signIn:", error);
             toast.error("Sign in failed");
