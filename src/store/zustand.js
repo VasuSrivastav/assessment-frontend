@@ -46,29 +46,31 @@ export const useStore = create(persist(
                         document.cookie = `jwtToken=${res.data.token}; path=/`;
                         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
                         set({ authUser: true, userRole: res.data.role });
+                        
+                        localStorage.setItem('rolestatus', res.data.role);
                 } catch (error) {
                         console.log("Error in googleSignIn:", error);
                         toast.error("Google sign-in failed");
                 }
-        },
-
-        signUp: async (formData) => {
-                set({ isSigningUp: true });
-                try {
+            },
+                signUp: async (formData) => {
+                    set({ isSigningUp: true });
+                    try {
                         const res = await axiosInstance.post("/register", formData);
                         toast.success("User registered successfully");
                         document.cookie = `jwtToken=${res.data.token}; path=/`;
                         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
                         set({ authUser: true, userRole: res.data.role });
-                } catch (error) {
+                        localStorage.setItem('rolestatus', res.data.role);
+                    } catch (error) {
                         console.log("Error in signUp:", error);
                         toast.error("Sign up failed");
-                } finally {
+                    } finally {
                         set({ isSigningUp: false });
-                }
-        },
+                    }
+                },
 
-        signIn: async (formData) => {
+                signIn: async (formData) => {
                 set({ isLoggingIn: true });
                 try {
                         const res = await axiosInstance.post("/login", formData);
@@ -90,6 +92,8 @@ export const useStore = create(persist(
                         document.cookie = 'jwtToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                         delete axiosInstance.defaults.headers.common['Authorization'];
                         set({ authUser: null, userRole: null });
+                        
+                        localStorage.removeItem('rolestatus');
                         toast.success("Logged out successfully");
                 } catch (error) {
                         console.log("Error in signOut:", error);
