@@ -161,6 +161,7 @@ export const useStore = create(persist(
 
         updateUserRole: async (userId, role) => {
             set({ isUpdatingUserRole: true });
+            userId = selectedUser.uid;
             console.log("Role:", role);
             console.log("userId:", userId);
             try {
@@ -186,7 +187,7 @@ export const useStore = create(persist(
         },
     }),
     {
-        name: 'zustand-store', // unique name
-        getStorage: () => localStorage, // (optional) by default, 'localStorage' is used
+        name: 'zustand-store', 
+        getStorage: () => localStorage, 
     }
 ));
