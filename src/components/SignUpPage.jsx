@@ -35,7 +35,7 @@ const SignUpPage = () => {
         googleSignIn(token);
     } catch (error) {
         console.log("Error in handleGoogleSignIn:", error);
-        toast.error("Google sign-in failed");
+        // toast.error("Google sign-in failed");
     }
   };
 

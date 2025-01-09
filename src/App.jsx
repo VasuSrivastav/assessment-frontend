@@ -21,7 +21,7 @@ function App() {
         script.onload = () => {
             window.gapi.load('auth2', () => {
                 window.gapi.auth2.init({
-                    client_id: import.meta.env.VITE__GOOGLE_CLIENT_ID,
+                    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
                 });
             });
         };
