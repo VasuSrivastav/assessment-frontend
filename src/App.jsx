@@ -6,29 +6,14 @@ import Home from "./components/Home";
 import Posts from "./components/Posts.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
-// import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from "react-hot-toast";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import "./App.css";
 
 function App() {
   const { authUser, initializeAuth, isCheckingAuth } = useStore();
 
   useEffect(() => {
-    const loadGoogleScript = () => {
-        const script = document.createElement('script');
-        script.src = 'https://apis.google.com/js/platform.js';
-        script.async = true;
-        script.onload = () => {
-            window.gapi.load('auth2', () => {
-                window.gapi.auth2.init({
-                    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-                });
-            });
-        };
-        document.body.appendChild(script);
-    };
-
-    loadGoogleScript();
     initializeAuth();
   }, [initializeAuth]);
 
@@ -40,8 +25,7 @@ function App() {
     );
 
   return (
-    <>
-    {/* <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID"> */}
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <NavBar />
       <Router>
         <Routes>
@@ -52,8 +36,7 @@ function App() {
         </Routes>
       </Router>
       <Toaster />
-      {/* </GoogleOAuthProvider> */}
-    </>
+    </GoogleOAuthProvider>
   );
 }
 

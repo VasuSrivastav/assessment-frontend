@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../store/zustand.js';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 const SignUpPage = () => {
   const { signUp, isSigningUp, googleSignIn } = useStore();
@@ -28,17 +29,6 @@ const SignUpPage = () => {
     }
   };
 
-  const handleGoogleSignIn = () => {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signIn().then((googleUser) => {
-      const token = googleUser.getAuthResponse().id_token;
-      googleSignIn(token);
-    }).catch((error) => {
-      console.log("Error in handleGoogleSignIn:", error);
-      // toast.error("Google sign-in failed");
-    });
-  };
-
   return (
     <div className="flex justify-center items-center h-screen bg-slate-400">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
@@ -63,12 +53,14 @@ const SignUpPage = () => {
             Sign Up
           </button>
         </form>
-        <button
-          onClick={handleGoogleSignIn}
-          className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-4"
-        >
-          Sign Up with Google
-        </button>
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            googleSignIn(credentialResponse.credential);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
         <button
           onClick={() => navigate('/login')}
           className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
