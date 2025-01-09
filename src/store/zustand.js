@@ -41,7 +41,7 @@ export const useStore = create((set, get) => ({
             toast.success("Logged in successfully");
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-            console.log("User role googleSignIn:", res.data.Role);
+            // console.log("User role googleSignIn:", res.data.Role);
             set({ authUser: true, userRole: res.data.Role });
         } catch (error) {
             console.log("Error in googleSignIn:", error);
@@ -73,8 +73,7 @@ export const useStore = create((set, get) => ({
             document.cookie = `jwtToken=${res.data.token}; path=/`;
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
             set({ authUser: true , userRole: res.data.role });
-            console.log("User role signIn data:", res.data.Role);
-            console.log("User role signIn:", res.data.role);
+            // console.log("User role signIn data:", res.data.Role);
         } catch (error) {
             console.log("Error in signIn:", error);
             toast.error("Sign in failed");
