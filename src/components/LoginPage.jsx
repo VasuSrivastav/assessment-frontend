@@ -29,8 +29,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-400">
-      <div className='text-lg text-black'>Note - <a href='https://user-api-backend-vqb2.onrender.com/' target='_blank' rel='noopener noreferrer'>first check if the server is working--takes 50sec, it turns off after 10 minutes of inactivity </a></div>
+    <div className="flex flex-col justify-center items-center h-screen bg-slate-400">
+      <div className='text-lg text-black underline bg-red-400'>Note - <a href='https://user-api-backend-vqb2.onrender.com/' target='_blank' rel='noopener noreferrer'>first check server is working--takes 50sec -click here-, it turns off after 10 minutes of inactivity </a></div>
+      <br />
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6">Sign In</h2>
         <form onSubmit={handleSignInFormSubmit}>

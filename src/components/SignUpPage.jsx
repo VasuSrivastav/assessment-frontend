@@ -30,8 +30,8 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-400">
-      <div className='text-lg text-black'>Note - <a href='https://user-api-backend-vqb2.onrender.com/' target='_blank' rel='noopener noreferrer'>first check if the server is working--takes 50sec, it turns off after 10 minutes of inactivity </a></div>
+    <div className="flex flex-col justify-center items-center h-screen bg-slate-400">
+      <div className='text-lg text-black mt-6 underline bg-red-400'>Note - <a href='https://user-api-backend-vqb2.onrender.com/' target='_blank' rel='noopener noreferrer'>first check the server is working--takes 50sec -click here-, it turns off after 10 minutes of inactivity </a></div>
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
         <form onSubmit={handleSignUpFormSubmit}>
