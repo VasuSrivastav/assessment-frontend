@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/zustand.js';
-import { set } from 'mongoose';
 
 const Home = () => {
   const navigate = useNavigate();
