@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 export const useStore = create((set, get) => ({
     authUser: null,
-    userRole: null,
+    userRole: "user",
     isSigningUp: false,
     isLoggingIn: false,
     isCheckingAuth: true,
