@@ -34,7 +34,7 @@ function App() {
           <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
           <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
           <Route path="/posts" element={authUser ? <Posts /> : <Navigate to="/login" />} />
-          <Route path="/dashboard" element={userRole === 'admin' ? <Dashboard /> : <Navigate to="/" />} />
+          <Route path="/dashboard" element={authUser  ? <Dashboard /> : <Navigate to="/" />} />
         </Routes>
       </Router>
       <Toaster />
