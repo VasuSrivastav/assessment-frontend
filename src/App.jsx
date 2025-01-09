@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Posts from "./components/Posts.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
+// import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
@@ -20,7 +21,7 @@ function App() {
         script.onload = () => {
             window.gapi.load('auth2', () => {
                 window.gapi.auth2.init({
-                    client_id: 'YOUR_GOOGLE_CLIENT_ID',
+                    client_id: import.meta.env.VITE__GOOGLE_CLIENT_ID,
                 });
             });
         };
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <>
+    {/* <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID"> */}
       <NavBar />
       <Router>
         <Routes>
@@ -50,6 +52,7 @@ function App() {
         </Routes>
       </Router>
       <Toaster />
+      {/* </GoogleOAuthProvider> */}
     </>
   );
 }
