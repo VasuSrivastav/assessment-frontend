@@ -6,12 +6,13 @@ import Home from "./components/Home";
 import Posts from "./components/Posts.jsx";
 import SignUpPage from "./components/SignUpPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
+import Dashboard from "./components/Dashboard.jsx";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "./App.css";
 
 function App() {
-  const { authUser, initializeAuth, isCheckingAuth } = useStore();
+  const { authUser, initializeAuth, isCheckingAuth, userRole } = useStore();
 
   useEffect(() => {
     initializeAuth();
@@ -33,6 +34,7 @@ function App() {
           <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
           <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
           <Route path="/posts" element={authUser ? <Posts /> : <Navigate to="/login" />} />
+          <Route path="/dashboard" element={userRole === 'admin' ? <Dashboard /> : <Navigate to="/" />} />
         </Routes>
       </Router>
       <Toaster />
