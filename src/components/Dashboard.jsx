@@ -27,7 +27,7 @@ const Dashboard = () => {
         Go to Home
                     </button>
             </div>
-            <div>
+            <div className="flex">
         
                 <div className="w-1/3">
                 <h2 className="text-2xl font-bold mb-6">Users</h2>
