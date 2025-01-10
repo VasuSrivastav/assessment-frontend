@@ -91,6 +91,7 @@ export const useStore = create(persist(
                 delete axiosInstance.defaults.headers.common['Authorization'];
                 set({ authUser: null, userRole: null });
                 set({users: [], posts: []});
+                set({selectedUser: null});
                 toast.success("Logged out successfully");
             } catch (error) {
                 console.log("Error in signOut:", error);

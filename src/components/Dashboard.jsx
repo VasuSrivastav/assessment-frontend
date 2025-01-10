@@ -18,14 +18,18 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex p-8">
-            <button
+        <div className="flex flex-col p-8">
+            <div>
+                <button
         onClick={() => navigate('/')}
         className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mb-6"
       >
         Go to Home
-      </button>
-            <div className="w-1/3">
+                    </button>
+            </div>
+            <div>
+        
+                <div className="w-1/3">
                 <h2 className="text-2xl font-bold mb-6">Users</h2>
                 {isFetchingUsers ? (
                     <p>Loading users...</p>
@@ -69,6 +73,7 @@ const Dashboard = () => {
                     <p>Select a user to see their info</p>
                 )}
             </div>
+      </div>
         </div>
     );
 };
