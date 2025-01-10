@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useStore } from '../store/zustand.js';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const { fetchUsers, users, isFetchingUsers, updateUserRole, isUpdatingUserRole, fetchUserInfo, selectedUser } = useStore();
-
+    const navigate = useNavigate();
     useEffect(() => {
         fetchUsers();
     }, [fetchUsers]);
@@ -18,6 +19,12 @@ const Dashboard = () => {
 
     return (
         <div className="flex p-8">
+            <button
+        onClick={() => navigate('/')}
+        className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mb-6"
+      >
+        Go to Home
+      </button>
             <div className="w-1/3">
                 <h2 className="text-2xl font-bold mb-6">Users</h2>
                 {isFetchingUsers ? (

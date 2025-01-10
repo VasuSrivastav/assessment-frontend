@@ -90,6 +90,7 @@ export const useStore = create(persist(
                 document.cookie = 'jwtToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                 delete axiosInstance.defaults.headers.common['Authorization'];
                 set({ authUser: null, userRole: null });
+                set({users: [], posts: []});
                 toast.success("Logged out successfully");
             } catch (error) {
                 console.log("Error in signOut:", error);
@@ -153,7 +154,7 @@ export const useStore = create(persist(
                 set({ users: res.data });
             } catch (error) {
                 console.log("Error in fetchUsers:", error);
-                toast.error("Failed to fetch users");
+                toast.error("you need to be an admin to view users");
             } finally {
                 set({ isFetchingUsers: false });
             }
@@ -182,7 +183,7 @@ export const useStore = create(persist(
                 set({ selectedUser: res.data });
             } catch (error) {
                 console.log("Error in fetchUserInfo:", error);
-                toast.error("Failed to fetch user info");
+                toast.error("you need to be an admin to view user info");
             }
         },
     }),
